@@ -3,7 +3,7 @@ Summary:	Library for providing superuser privileges
 Summary(pl):	Biblioteka do udostêpnianai uprawnieñ superu¿ytkownika
 Name:		libgnomesu
 Version:	0.9.5
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomesu/0.9/%{name}-%{version}.tar.bz2
@@ -11,7 +11,7 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomesu/0.9/%{name}-%{version
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel
 BuildRequires:	gtk+2-devel
-BuildRequires:	libgnomeui-devel
+BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	pam-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
