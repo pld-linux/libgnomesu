@@ -1,4 +1,6 @@
+# TODO: separate -libs: suid binaries are not needed for -devel
 Summary:	Library for providing superuser privileges
+Summary(pl):	Biblioteka do udostêpnianai uprawnieñ superu¿ytkownika
 Name:		libgnomesu
 Version:	0.9.5
 Release:	1
@@ -16,6 +18,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 libgnomesu is a library for providing superuser privileges to GNOME
 applications. It supports sudo, consolehelper, PAM and su.
+
+%description -l pl
+libgnomesu to biblioteka do udostêpniania uprawnieñ superu¿ytkownika
+aplikacjom GNOME. Obs³uguje sudo, consolehelper, PAM i su.
 
 %package devel
 Summary:	Headers for libgnomesu
@@ -66,13 +72,13 @@ chmod 755 $RPM_BUILD_ROOT%{_libdir}/gnomesu*backend
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
 %files -f %{name}-1.0.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%config(noreplace) %verify(not md5 size mtime) /etc/pam.d/gnomesu-pam
+%config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gnomesu-pam
 %attr(755,root,root) %{_bindir}/gnomesu
 %attr(4755,root,root) %{_libdir}/gnomesu-backend
 %attr(4755,root,root) %{_libdir}/gnomesu-pam-backend
