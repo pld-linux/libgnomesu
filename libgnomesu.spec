@@ -1,6 +1,6 @@
 # TODO: separate -libs: suid binaries are not needed for -devel
 Summary:	Library for providing superuser privileges
-Summary(pl):	Biblioteka do udostêpnianai uprawnieñ superu¿ytkownika
+Summary(pl.UTF-8):   Biblioteka do udostÄ™pnianai uprawnieÅ„ superuÅ¼ytkownika
 Name:		libgnomesu
 Version:	0.9.5
 Release:	2
@@ -19,33 +19,33 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 libgnomesu is a library for providing superuser privileges to GNOME
 applications. It supports sudo, consolehelper, PAM and su.
 
-%description -l pl
-libgnomesu to biblioteka do udostêpniania uprawnieñ superu¿ytkownika
-aplikacjom GNOME. Obs³uguje sudo, consolehelper, PAM i su.
+%description -l pl.UTF-8
+libgnomesu to biblioteka do udostÄ™pniania uprawnieÅ„ superuÅ¼ytkownika
+aplikacjom GNOME. ObsÅ‚uguje sudo, consolehelper, PAM i su.
 
 %package devel
 Summary:	Headers for libgnomesu
-Summary(pl):	Pliki nag³ówkowe libgnomesu
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe libgnomesu
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Libraries and include files that you will need to use libgnomesu.
 
-%description devel -l pl
-Pliki nag³ówkowe potrzebne do kompilowania programów korzystaj±cych z
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe potrzebne do kompilowania programÃ³w korzystajÄ…cych z
 libgnomesu.
 
 %package static
 Summary:	Static libgnomesu libraries
-Summary(pl):	Statyczne biblioteki libgnomesu
+Summary(pl.UTF-8):   Statyczne biblioteki libgnomesu
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static version of libgnomesu libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna wersja bibliotek libgnomesu.
 
 %prep
