@@ -1,6 +1,6 @@
 # TODO: separate -libs: suid binaries are not needed for -devel
 Summary:	Library for providing superuser privileges
-Summary(pl.UTF-8):   Biblioteka do udostępnianai uprawnień superużytkownika
+Summary(pl.UTF-8):	Biblioteka do udostępnianai uprawnień superużytkownika
 Name:		libgnomesu
 Version:	0.9.5
 Release:	2
@@ -25,7 +25,7 @@ aplikacjom GNOME. Obsługuje sudo, consolehelper, PAM i su.
 
 %package devel
 Summary:	Headers for libgnomesu
-Summary(pl.UTF-8):   Pliki nagłówkowe libgnomesu
+Summary(pl.UTF-8):	Pliki nagłówkowe libgnomesu
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -38,7 +38,7 @@ libgnomesu.
 
 %package static
 Summary:	Static libgnomesu libraries
-Summary(pl.UTF-8):   Statyczne biblioteki libgnomesu
+Summary(pl.UTF-8):	Statyczne biblioteki libgnomesu
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
