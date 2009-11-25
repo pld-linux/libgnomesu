@@ -9,6 +9,7 @@ Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomesu/0.9/%{name}-%{version
 # Source0-md5:	0232d1356c9c12327e8729495fb4f9a0
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel >= 2.0
+BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.0
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	pam-devel
