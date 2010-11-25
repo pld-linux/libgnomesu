@@ -1,0 +1,23 @@
+diff --git a/su-backend/common.c b/su-backend/common.c
+index 004119c..31124ca 100644
+--- a/su-backend/common.c
++++ b/su-backend/common.c
+@@ -188,6 +188,8 @@ void
+ change_identity (const struct passwd *pw)
+ {
+ 	FILE *p;
++	const gchar *hostname;
++	gchar *command;
+ 
+ #ifdef HAVE_INITGROUPS
+ 	errno = 0;
+@@ -199,6 +201,9 @@ change_identity (const struct passwd *pw)
+ 	if (setuid (pw->pw_uid))
+ 		perror ("cannot set user id");
+ 
++        command = g_strdup_printf ("xauth -q remove %s/unix:0", g_get_host_name ());
++        g_spawn_command_line_sync (command, NULL, NULL, NULL, NULL);
++
+ 	/* Create a new .Xauthorization file */
+ 	if (!xauth_data) return;
+ 	p = popen ("xauth -q nmerge - 2>/dev/null", "w");
