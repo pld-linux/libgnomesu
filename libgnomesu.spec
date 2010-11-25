@@ -1,13 +1,24 @@
 Summary:	Library for providing superuser privileges
 Summary(pl.UTF-8):	Biblioteka do udostępniania uprawnień superużytkownika
 Name:		libgnomesu
-Version:	0.9.5
-Release:	5
+Version:	1.0.0
+Release:	1
 License:	LGPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomesu/0.9/%{name}-%{version}.tar.bz2
-# Source0-md5:	0232d1356c9c12327e8729495fb4f9a0
-URL:		http://www.gnome.org/
+Source0:	http://members.chello.nl/~h.lai/libgnomesu/%{name}-%{version}.tar.gz
+# Source0-md5:	9f1cb8c3f61ad2fb31ad05a5d3eb211d
+Patch0:		%{name}-xauth-nolookup.patch
+Patch1:		%{name}-mainloop.patch
+Patch2:		%{name}-unsetenv.patch
+Patch3:		%{name}-modernize.patch
+Patch4:		%{name}-startup-notification.patch
+Patch5:		%{name}-pam-handling.patch
+Patch6:		%{name}-drop-libgnomeui.patch
+Patch7:		%{name}-safe-path.patch
+Patch8:		%{name}-remove-prior-cookie.patch
+Patch9:		%{name}-i18n.patch
+Patch10:	%{name}-memory-cleaning.patch
+URL:		http://members.chello.nl/~h.lai/libgnomesu/
 BuildRequires:	GConf2-devel >= 2.0
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 1:2.0
@@ -69,6 +80,17 @@ Statyczna wersja bibliotek libgnomesu.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p0
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
 
 %build
 %configure \
