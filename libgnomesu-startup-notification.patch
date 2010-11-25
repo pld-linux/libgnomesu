@@ -1,0 +1,56 @@
+Index: libgnomesu-1.0.0/pam-backend/pam.c
+===================================================================
+--- libgnomesu-1.0.0.orig/pam-backend/pam.c
++++ libgnomesu-1.0.0/pam-backend/pam.c
+@@ -53,6 +53,7 @@
+ 
+ 
+ static FILE *inf, *outf;
++static gboolean interacted = FALSE;
+ static gboolean Abort = FALSE;
+ const gchar *new_user;
+ 
+@@ -77,6 +78,7 @@ su_conv (int num_msg, const struct pam_m
+ 		{
+ 			gchar password[1024];
+ 
++			interacted = TRUE;
+ 			fprintf (outf, PROTOCOL_ASK_PASS);
+ 			safe_memset (password, 0, sizeof (password));
+ 			if (!fgets (password, sizeof (password), inf)) {
+@@ -286,6 +288,12 @@ main (int argc, char *argv[])
+ 			outf = NULL;
+ 			break;
+ 		case 0:
++			if (!interacted) {
++				const char *desktop_startup_id;
++				desktop_startup_id = g_getenv ("_GNOMESU_DESKTOP_STARTUP_ID");
++				if (desktop_startup_id)
++					g_setenv ("DESKTOP_STARTUP_ID", desktop_startup_id, FALSE);
++			}
+ 			execvp (command[0], command);
+ 			_exit (1);
+ 			break;
+Index: libgnomesu-1.0.0/tools/gnomesu.c
+===================================================================
+--- libgnomesu-1.0.0.orig/tools/gnomesu.c
++++ libgnomesu-1.0.0/tools/gnomesu.c
+@@ -61,11 +61,18 @@ main (int argc, char *argv[])
+ 	GnomeProgram *program;
+ 	GValue value = { 0 };
+ 	poptContext pctx;
++	const char *desktop_startup_id;
+ 
+ 	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+ 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+ 	textdomain (GETTEXT_PACKAGE);
+ 
++	/* get the startup id before GTK+ unsets it, so we can forward it if
++	 * there's no authentication dialog */
++	desktop_startup_id = g_getenv ("DESKTOP_STARTUP_ID");
++	if (desktop_startup_id)
++		g_setenv ("_GNOMESU_DESKTOP_STARTUP_ID", desktop_startup_id, TRUE);
++
+ 	program = gnome_program_init ("gnomesu", VERSION,
+ 			LIBGNOMEUI_MODULE, argc, argv,
+ 			GNOME_PARAM_POPT_TABLE, options,
