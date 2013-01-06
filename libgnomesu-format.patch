@@ -1,0 +1,22 @@
+--- libgnomesu-1.0.0/src/services/pam.c.orig	2013-01-06 11:13:40.873468264 +0100
++++ libgnomesu-1.0.0/src/services/pam.c	2013-01-06 11:16:44.691946641 +0100
+@@ -64,7 +64,7 @@
+ 	dialog = gtk_message_dialog_new ((GtkWindow *) auth,
+ 		GTK_DIALOG_MODAL,
+ 		GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+-		msg);
++		"%s", msg);
+ 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+ 	gtk_dialog_run (GTK_DIALOG (dialog));
+ 	gtk_widget_destroy (dialog);
+--- libgnomesu-1.0.0/src/services/su.c.orig	2013-01-06 11:17:54.831848415 +0100
++++ libgnomesu-1.0.0/src/services/su.c	2013-01-06 11:23:24.780400174 +0100
+@@ -60,7 +60,7 @@
+ 	dialog = gtk_message_dialog_new ((GtkWindow *) auth,
+ 		GTK_DIALOG_MODAL,
+ 		GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
+-		msg);
++		"%s", msg);
+ 	gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+ 	gtk_dialog_run (GTK_DIALOG (dialog));
+ 	gtk_widget_destroy (dialog);
