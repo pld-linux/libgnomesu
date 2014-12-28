@@ -21,7 +21,7 @@ Patch10:	%{name}-memory-cleaning.patch
 Patch11:	%{name}-format.patch
 URL:		http://members.chello.nl/~h.lai/libgnomesu/
 BuildRequires:	GConf2-devel >= 2.0
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	gtk+2-devel >= 1:2.0
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	pam-devel
