@@ -2,7 +2,7 @@ Summary:	Library for providing superuser privileges
 Summary(pl.UTF-8):	Biblioteka do udostępniania uprawnień superużytkownika
 Name:		libgnomesu
 Version:	1.0.0
-Release:	8
+Release:	9
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	http://members.chello.nl/~h.lai/libgnomesu/%{name}-%{version}.tar.gz
@@ -108,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-chmod 755 $RPM_BUILD_ROOT%{_libdir}/gnomesu*backend
+chmod 755 $RPM_BUILD_ROOT%{_libexecdir}/gnomesu*backend
 
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{sr@Latn,sr@latin}
 
@@ -125,8 +125,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README TODO
 %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gnomesu-pam
 %attr(755,root,root) %{_bindir}/gnomesu
-%attr(4755,root,root) %{_libdir}/gnomesu-backend
-%attr(4755,root,root) %{_libdir}/gnomesu-pam-backend
+%attr(4755,root,root) %{_libexecdir}/gnomesu-backend
+%attr(4755,root,root) %{_libexecdir}/gnomesu-pam-backend
 %{_datadir}/application-registry/gnomesu-nautilus.applications
 %{_datadir}/mime-info/gnomesu-nautilus.keys
 
