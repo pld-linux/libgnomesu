@@ -1,8 +1,12 @@
+#
+# Conditional build:
+%bcond_without	static_libs
+
 Summary:	Library for providing superuser privileges
 Summary(pl.UTF-8):	Biblioteka do udostępniania uprawnień superużytkownika
 Name:		libgnomesu
 Version:	1.0.0
-Release:	10
+Release:	11
 License:	LGPL v2+
 Group:		X11/Applications
 Source0:	http://members.chello.nl/~h.lai/libgnomesu/%{name}-%{version}.tar.gz
@@ -19,9 +23,11 @@ Patch8:		%{name}-remove-prior-cookie.patch
 Patch9:		%{name}-i18n.patch
 Patch10:	%{name}-memory-cleaning.patch
 Patch11:	%{name}-format.patch
+Patch12:	%{name}-libdir.patch
 URL:		http://members.chello.nl/~h.lai/libgnomesu/
 BuildRequires:	GConf2-devel >= 2.0
 BuildRequires:	gettext-tools
+BuildRequires:	glib2-devel >= 2.0
 BuildRequires:	gtk+2-devel >= 1:2.0
 BuildRequires:	libgnomeui-devel >= 2.10.0-2
 BuildRequires:	pam-devel
@@ -59,6 +65,7 @@ Summary:	Headers for libgnomesu
 Summary(pl.UTF-8):	Pliki nagłówkowe libgnomesu
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	glib2-devel >= 2.0
 
 %description devel
 Libraries and include files that you will need to use libgnomesu.
@@ -93,12 +100,13 @@ Statyczna wersja bibliotek libgnomesu.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
 
 %build
 %configure \
 	--disable-schemas-install \
 	--disable-setuid-error \
-	--enable-static
+	%{?with_static_libs:--enable-static}
 
 %{__make}
 
@@ -109,6 +117,9 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 chmod 755 $RPM_BUILD_ROOT%{_libexecdir}/gnomesu*backend
+
+# obsoleted by pkg-config
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libgnomesu.la
 
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{sr@Latn,sr@latin}
 
@@ -139,10 +150,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc doc/api.html doc/libgnomesu.css
 %attr(755,root,root) %{_libdir}/libgnomesu.so
-%{_libdir}/libgnomesu.la
 %{_includedir}/libgnomesu-1.0
 %{_pkgconfigdir}/libgnomesu-1.0.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libgnomesu.a
+%endif
